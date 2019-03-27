@@ -1,0 +1,25 @@
+{
+  "name": "asteroidsfilebrowser",
+  "version": "1.0.0",
+  "description": "Asteroids game but implemented to be used as a file browser",
+  "main": "window.js",
+  "dependencies": {
+    "electron": "^4.1.1",
+    "http-server": "^0.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Synkronize/AsteroidsFileBrowser.git"
+  },
+  "author": "Synkronize",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Synkronize/AsteroidsFileBrowser/issues"
+  },
+  "homepage": "https://github.com/Synkronize/AsteroidsFileBrowser#readme"
+}

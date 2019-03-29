@@ -1,9 +1,14 @@
+// Necessary Variables.
 let black = '#000000';
 let ship;
+let ACCELERATION = 100;
+let ROTATIONSPEED = 180;
+let accelKey;
+
+// Configuration of the game environment.
+// Scalar lets game scale to the size of the electron window.
 let config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
     physics: {
         default: 'arcade',
         arcade: {
@@ -15,27 +20,54 @@ let config = {
         create: create,
         update: update,
 
+    },
+    scale:{
+        mode: Phaser.Scale.RESIZE,
+       
     }
 
 };
 
+//Make game object
 var game = new Phaser.Game(config);
-function preload(){
-    this.load.setBaseURL('http://labs.phaser.io');
-    
-    this.load.image('ship', 'assets/sprites/asteroids_ship_white.png');
+
+// preload function, before we create the scene this is whats done for the scene.
+function preload(){    
+    this.load.image('ship', 'Ship.png');
 }
 
+// Run this code when the scene is created.
+//  Place the ship in the scene
+//  Set no collision on scene borders
+// Set the origin point of the ship to be the middle.
+// Background color black, assign some event handlers, and define more aspects of the ship.
 function create(){
-    console.log(this.cameras);
-    ship = this.physics.add.image(400, 300, 'ship');
+    accelKey = this.input.keyboard.addKey('UP');
+    ship = this.physics.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'ship');
     ship.setVelocity(0, 0);
     ship.setCollideWorldBounds(false);
-    emitter.startFollow(logo);
+    ship.setOrigin(0.5, 0.5);
     this.cameras.main.setBackgroundColor();
+    this.input.keyboard.on('keyup-UP', slowDown);
+    this.input.keyboard.on('keydown-LEFT', rotateLeft);
+    this.input.keyboard.on('keydown-RIGHT', rotateRight);
+    this.input.keyboard.on('keyup-LEFT', stopRotating);
+    this.input.keyboard.on('keyup-RIGHT', stopRotating);
+    ship.setMaxVelocity(500);
+    ship.setDrag(100);
+    
 
 }
+// Update is a continuously running function in scene, 
+// polling is used here for accelerate so that the proper rotation is captured every time.
 function update(){
-    this.physics.world.wrap(logo);
+    this.physics.world.wrap(ship);
+    if(accelKey.isDown)
+        accelerate();
+  
+
 }
+
+ 
+
 create();

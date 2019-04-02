@@ -23,3 +23,9 @@ function rotateRight(){
 function stopRotating(){
     ship.setAngularVelocity(0);
 }
+
+function shoot(){
+    bullets.create(ship.x, 290, 'bullet');
+    bullets.setVelocityX(Math.cos(ship.rotation) * 300);
+    bullets.setVelocityY(Math.sin(ship.rotation) * 300);
+}

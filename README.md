@@ -85,9 +85,6 @@ asteroids are files.
 disclaimers:
 - When the game is in pause mode type in !cancel
 into the textbox to cancel the operation.
-- This game is still in a very early version, it
-does not work on Linux (at least not on my
-system).
 - And you must try to commit to one operation
 at a time as there may be parts of the code
 that intertwine in ways that I have not

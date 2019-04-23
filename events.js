@@ -161,7 +161,7 @@ function deleteMode(fileName){
 }
 // Saves the current file's path and informs the user that the program is in copy mode.
 function copyFile(fileName){
-    clipboard.path = currentDirectory + '\\' + fileName;
+    clipboard.path = currentDirectory + slash + fileName;
     clipboard.fileName = fileName;
     let text = testScene.add.text(10, 150,'Clipboard: ' + fileName + '\n' + 'Press P to paste or M to move.', { fontFamily: '"Roboto Condensed"' });
     text.name = 'clipboard';
@@ -173,7 +173,7 @@ function displayInfo(fileName){
     let stats = getInfo(fileName);
     let text = testScene.add.text(10, 10,
         'Filename: ' + fileName + '\n'
-        + 'File path: ' + currentDirectory + '\\' + fileName + '\n'
+        + 'File path: ' + currentDirectory + slash + fileName + '\n'
         + 'Creation Time: ' + stats.birthtime + '\n'
         + 'Modified Time: ' + stats.mtime + '\n'
         + 'Size: ' + stats.size + ' Bytes' + '\n', { fontFamily: '"Roboto Condensed"' });

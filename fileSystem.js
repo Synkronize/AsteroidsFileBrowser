@@ -16,7 +16,7 @@ function getParentDirectory(){
     currentDirectory = currentDirectory.substring(0, indexes[indexes.length - 1]);
     // if we end up at C: then make it C:\
     if(regex.exec(currentDirectory) == null)
-        currentDirectory  += '\\';
+        currentDirectory  += slash;
     // refresh the scene.
     refresh();
     constructCurrentDirectoryHeader();
@@ -24,7 +24,7 @@ function getParentDirectory(){
 
 // is the file passed in a directory?
 function isDirectory(file){
-    return fs.statSync(currentDirectory + '\\' + file).isDirectory();
+    return fs.statSync(currentDirectory + slash + file).isDirectory();
 }
 
 function updateFileList(){
@@ -32,14 +32,14 @@ function updateFileList(){
 }
 // Go to the directory and refresh the scene.
 function goToNewDirectory(directoryName){
-    currentDirectory += '\\' + directoryName;
+    currentDirectory += slash + directoryName;
     constructCurrentDirectoryHeader();
     refresh();
 }
 
 // Create a file, and create some system text to display to the user that the file was created.
 function createFile(fileName){
-    fs.writeFileSync(currentDirectory + '\\' + fileName, '');
+    fs.writeFileSync(currentDirectory + slash + fileName, '');
     let systemText = testScene.add.text(10, 200, 'Created File: ' + fileName + '\n' + 'in\n' + currentDirectory, { fontFamily: '"Roboto Condensed"' });
     systemText.name = 'create';
     systemInformationTexts.add(systemText);
@@ -54,13 +54,13 @@ function refresh(){
 
 
 function deleteFile(fileName){
-    fs.unlinkSync(currentDirectory + '\\' + fileName, '');
+    fs.unlinkSync(currentDirectory + slash + fileName, '');
 }
 
 // create a folder, and create some system text to display to the user that the directory was created.
 // Also navigate into it.
 function createFolder(folderName){
-    fs.mkdirSync(currentDirectory + '\\' + folderName);
+    fs.mkdirSync(currentDirectory + slash + folderName);
     let systemText = testScene.add.text(10, 200, 'Created Folder: ' + folderName + '\n' + 'in\n' + currentDirectory, { fontFamily: '"Roboto Condensed"' });
     systemText.name = 'createF';
     systemInformationTexts.add(systemText);
@@ -68,13 +68,13 @@ function createFolder(folderName){
 }
 
 function deleteFolder(folderName){
-    fs.removeSync(currentDirectory + '\\' + folderName);
+    fs.removeSync(currentDirectory + slash + folderName);
 
 }
 
 // Copy the file into the current directory, display system text to inform user.
 function pasteFile(){
-    fs.copyFileSync(clipboard.path, currentDirectory + '\\' + clipboard.fileName);
+    fs.copyFileSync(clipboard.path, currentDirectory + slash + clipboard.fileName);
     systemInformationTexts.remove(findTextObjInGroup('clipboard'), true, true);
     let systemText = testScene.add.text(10, 350, 'Copied File: ' + clipboard.fileName + '\n' + 'in to\n' + currentDirectory, { fontFamily: '"Roboto Condensed"' });
     systemText.name = 'copy';
@@ -84,7 +84,7 @@ function pasteFile(){
 }
 // Move file into current directory, display system text to inform user.
 function moveFile(){
-    fs.moveSync(clipboard.path, currentDirectory + '\\' + clipboard.fileName);
+    fs.moveSync(clipboard.path, currentDirectory + slash + clipboard.fileName);
     systemInformationTexts.remove(findTextObjInGroup('clipboard'), true, true);
     let systemText = testScene.add.text(10, 350, 'Moved File: ' + clipboard.fileName + ' from\n' + clipboard.path + 
     ' to\n' + currentDirectory, { fontFamily: '"Roboto Condensed"' });
@@ -95,5 +95,5 @@ function moveFile(){
 
 // get the statistic information of a file.
 function getInfo(fileName){
-    return fs.statSync(currentDirectory + '\\' + fileName);
+    return fs.statSync(currentDirectory + slash + fileName);
 }

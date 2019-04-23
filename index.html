@@ -1,9 +1,12 @@
 <html>
-    <head>
-            <script src="Http://cdn.jsdelivr.net/npm/phaser@3.16.2/dist/phaser.js"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-            <script src="events.js"></script>
-            <script src="game.js"></script>
-    </head>
-    <body style="overflow: hidden;"></body>
+    <body style="overflow: hidden;">
+        <button data-bind="click: showInput, visible: !inputVisible()">Show input</button>
+        <button data-bind="click: hideInput, visible: inputVisible">Hide input</button>
+        <input data-bind="value: userInput, visible: inputVisible, event:{enter: resume}">
+    </body>
+    <script src="Http://cdn.jsdelivr.net/npm/phaser@3.16.2/dist/phaser.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="events.js"></script>
+    <script src="fileSystem.js"></script>
+    <script src="game.js"></script>
 </html>

@@ -12,6 +12,13 @@ let currentDirectory = require('os').homedir();
 let knockout = require('knockout')
 let systemInformationTexts;
 let fileList = getFiles(currentDirectory);
+let slash;
+let platform = window.navigator.platform
+if(platform.includes('Windows'))
+    slash = '\\';
+else
+    slash = '/';
+console.log(window.navigator.platform);
 let currentFileIndex = 0;
 // Amount of files that will be displayed in the scene.
 let NUMBEROFFILES = 7;
